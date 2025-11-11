@@ -1,19 +1,22 @@
 import express from "express";
+const app = express();
 import dotenv from "dotenv";
 import { dbConnect } from "./utils/dbConnect.js";
 import cors from "cors"
 app.use(cors())
 
 dotenv.config();
-const app = express();
+
 app.use(express.json()); 
 import userRoutes from "./routes/userRoutes.js"
 import authRoutes from "./routes/authRoutes.js"
+import taskRoutes from "./routes/taskRoutes.js"
 const port = process.env.PORT || 3000;
 
-app.use("/api/tasks", taskRoutes); // Now this line will work
-app.use("/users/userRoutes",userRoutes)
-app.use("/users/auth",authRoutes)
+app.use("/tasks", taskRoutes); // Now this line will work
+app.use("/users",userRoutes)
+app.use("/auth",authRoutes)
+
 
 const startServer = async () => {
   try {
